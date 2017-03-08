@@ -17,6 +17,10 @@ module ActiveSupport
         public_send(*a, &b)
       end
     end
+    
+    def attempt(*a, &b)
+      try(*a, &b) || self
+    end
   end
 end
 
@@ -100,6 +104,15 @@ class Object
   #   "a".try!(:upcase) # => "A"
   #   nil.try!(:upcase) # => nil
   #   123.try!(:upcase) # => NoMethodError: undefined method `upcase' for 123:Integer
+
+  ##
+  # :method: attempt
+  #
+  # :call-seq:
+  #   attempt(*a, &b)
+  #
+  # Same as #try but
+  # call returns +self+ rather than nil.
 end
 
 class Delegator
